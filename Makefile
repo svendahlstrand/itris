@@ -4,12 +4,12 @@ TETRIS_SHA := 74591cc9501af93873f9a5d3eb12da12c0723bbc
 # Expected SHA-1 after Itris patch is applied.
 ITRIS_SHA  := 94fe2a79ecfd69c439f8079258a541526e48d3d5
 
-.PHONY: all clean realclean check
+.PHONY: all clean realclean check tetris.gb
 
 all: itris.gb
 
 tetris.gb:
-	echo "$(TETRIS_SHA) *$@" | shasum -c || >&2 echo "You have to provide $@ with SHA-1 $(TETRIS_SHA)" ; exit 1
+	echo "$(TETRIS_SHA) *$@" | shasum -c || (>&2 echo "You have to provide $@ with SHA-1 $(TETRIS_SHA)" ; exit 1)
 
 itris.gb: tetris.gb
 	cp $< $@
